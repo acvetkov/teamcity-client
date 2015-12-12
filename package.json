@@ -1,11 +1,11 @@
 {
-  "name": "teamcity-api",
+  "name": "teamcity-client",
   "version": "1.0.0",
-  "description": "Teamcity Api for Node.js",
+  "description": "Teamcity Client for Node.js",
   "main": "out/index.js",
   "repository": {
     "type": "git",
-    "url": "git@github.com:acvetkov/teamcity-api.git"
+    "url": "git@github.com:acvetkov/teamcity-client.git"
   },
   "scripts": {
     "test": "mocha --recursive --compilers js:babel/register --require ./test/setup.js",
@@ -40,7 +40,6 @@
     "jscs": "^2.6.0",
     "mocha": "^2.3.4",
     "nock": "^3.3.2",
-    "sinon": "^1.17.2",
-    "webpack": "^1.12.9"
+    "sinon": "^1.17.2"
   }
 }
