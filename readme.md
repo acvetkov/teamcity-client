@@ -19,8 +19,20 @@ const options = {
     user: 'username'
 };
 
+// get last build by criteria
 teamcity.build.detail(options)
    .then(buildInfo => console.log(buildInfo))
    .catch(err => console.error(err));
+
+// get build by id
+teamcity.build.detail({id: 'my-build-id'})
+   .then(buildInfo => console.log(buildInfo))
+   .catch(err => console.error(err));
+   
+// get build by number
+teamcity.build.detail({number: '537'})
+   .then(buildInfo => console.log(buildInfo))
+   .catch(err => console.error(err));   
 ```
 
+You can use all [build locator](https://confluence.jetbrains.com/display/TCD9/REST+API#RESTAPI-BuildLocator) params to get build 
