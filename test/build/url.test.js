@@ -64,7 +64,7 @@ describe('buildListUrl', function () {
     it('should return list url for build id with tags', function () {
         assert.equal(
             buildListUrl(options, {buildType: {id: 'my-build-id'}, tags: ['production']}),
-            'http://teamcity.net/guestAuth/app/rest/builds/?locator=buildType:(id:my-build-id),tags:(pro)'
+            'http://teamcity.net/guestAuth/app/rest/builds/?locator=buildType:(id:my-build-id),tags:(production)'
         );
     });
 });
