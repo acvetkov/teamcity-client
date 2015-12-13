@@ -35,4 +35,14 @@ teamcity.build.detail({number: '537'})
    .catch(err => console.error(err));   
 ```
 
+Get list of builds by criteria
+
+```js
+teamcity.build.list({buildType: {id: 'project-id'}})
+   .then(buildList => console.log(buildList))
+   
+teamcity.build.list({buildType: {id: 'project-id'}, tags: ['production']})
+   .then(buildList => console.log(buildList))   
+```
+
 You can use all [build locator](https://confluence.jetbrains.com/display/TCD9/REST+API#RESTAPI-BuildLocator) params to get build 
