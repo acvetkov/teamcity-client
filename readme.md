@@ -46,3 +46,69 @@ teamcity.build.list({buildType: {id: 'project-id'}, tags: ['production']})
 ```
 
 You can use all [build locator](https://confluence.jetbrains.com/display/TCD9/REST+API#RESTAPI-BuildLocator) params to get build 
+
+### artifacts
+
+**Download source**
+
+```js
+const fs = require('q-io/fs');
+
+api.artifact.content(options, 'relative/path/to/source')
+   .then(blob => fs.write('data.zip', blob))
+```
+
+**Get metadata**
+
+```js
+api.artifact.meta(options, 'source.json')
+   .then(data => console.log(data));
+```
+
+Response example
+
+```json
+{
+  "name": "source.json",
+  "size": 25360,
+  "modificationTime": "20151202T183212+0300",
+  "href": "/guestAuth/app/rest/builds/id:10/artifacts/metadata/source.json",
+  "content": {
+    "href": "/guestAuth/app/rest/builds/id:10/artifacts/content/source.json"
+  }
+}
+```
+
+**Get children list**
+
+```js
+api.artifact.children(options, 'relative/path')
+   .then(data => console.log(JSON.stringify(data, null, 2)))
+```
+
+Response example
+
+```json
+{
+  "count": 1,
+  "file": [
+    {
+      "name": "pathA",
+      "modificationTime": "2T183246+0300",
+      "href": "/guestAuth/app/rest/builds/id:4869415/artifacts/metadata/relative/path/pathA",
+      "children": {
+        "href": "/guestAuth/app/rest/builds/id:4869415/artifacts/children/relative/path/pathA"
+      }
+    },
+  ]
+}
+```
+
+**Download archived sources**
+
+Download zip with all js-files in directory `relative/path`
+
+```js
+api.artifact.archived(options, 'relative/path', '**/*.js')
+   .then(blob => fs.write('data.zip', blob))
+```
