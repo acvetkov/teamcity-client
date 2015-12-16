@@ -1,6 +1,5 @@
 /**
  * @author https://github.com/acvetkov
- * @overview
  */
 
 import {contentUrl, metaUrl, childrenUrl, archivedUrl} from '../../src/artifact/url';
@@ -57,8 +56,7 @@ describe('childrenUrl', function () {
     });
 });
 
-describe('metaUrl', function () {
-    // jscs: disable
+describe('archivedUrl', function () {
     it('should return archivedUrl with artifact path', function () {
         assert.equal(
             archivedUrl(options, locator, 'path'),
@@ -66,7 +64,9 @@ describe('metaUrl', function () {
         );
         assert.equal(
             archivedUrl(options, locator, 'data/a/b', '**/*.js'),
+            // jscs: disable
             'http://teamcity.net/guestAuth/app/rest/builds/id:project-id/artifacts/archived/data/a/b?locator=pattern:**/*.js'
+            // jscs: enable
         );
     });
 });
