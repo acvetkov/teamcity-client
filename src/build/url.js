@@ -1,6 +1,6 @@
 /**
  * @author https://github.com/acvetkov
- * @overview
+ * @overview build urls helper
  */
 
 import {apiUrl} from '../utils/url';

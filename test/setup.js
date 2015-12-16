@@ -1,6 +1,6 @@
 /**
  * @author https://github.com/acvetkov
- * @overview
+ * @overview setup tests
  */
 
 var chai = require('chai');

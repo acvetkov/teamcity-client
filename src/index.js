@@ -1,7 +1,6 @@
 /**
  * @author https://github.com/acvetkov
- * @overview
- * Teamcity api entry point
+ * @overview Teamcity api entry point
  */
 
 import _ from 'lodash';

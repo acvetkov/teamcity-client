@@ -1,6 +1,5 @@
 /**
  * @author https://github.com/acvetkov
- * @overview
  */
 
 /**
