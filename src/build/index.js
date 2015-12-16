@@ -1,6 +1,7 @@
 /**
  * @author https://github.com/acvetkov
- * @overview
+ * @see https://confluence.jetbrains.com/display/TCD9/REST+API#RESTAPI-BuildLocator
+ * @overview Get build info by criteria
  */
 
 import http from 'q-io/http';

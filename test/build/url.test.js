@@ -1,9 +1,6 @@
 /**
  * @author https://github.com/acvetkov
- * @overview
  */
-
-// jscs:disable
 
 import {buildDetailUrl, buildListUrl} from '../../src/build/url';
 
@@ -25,7 +22,10 @@ describe('buildDetailUrl', function () {
     });
 
     it('should detail url for build number', function () {
-        assert.equal(buildDetailUrl(options, {number: '390'}), 'http://teamcity.net/guestAuth/app/rest/builds/number:390');
+        assert.equal(
+            buildDetailUrl(options, {number: '390'}),
+            'http://teamcity.net/guestAuth/app/rest/builds/number:390'
+        );
     });
 
     it('should return detail url with tags', function () {
@@ -45,7 +45,6 @@ describe('buildDetailUrl', function () {
         );
     });
 });
-
 
 describe('buildListUrl', function () {
 
