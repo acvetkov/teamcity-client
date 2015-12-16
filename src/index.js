@@ -9,14 +9,23 @@ import Build from './build/index';
 export default class TeamcityApi {
 
     /**
-     * Конструктор
      * @param {TeamcityApiOptions} options
      */
-    constructor (options = {}) {
+    constructor (options) {
+        assertOptions(options);
         this.options = _.defaults({}, options, {
             path: '/guestAuth/app/rest/',
             protocol: 'http://'
         });
         this.build = new Build(this.options);
+    }
+}
+
+/**
+ * @param {TeamcityApiOptions} options
+ */
+function assertOptions(options) {
+    if (!options || !_.isString(options.host)) {
+        throw new TypeError('host is not specified');
     }
 }
