@@ -1,6 +1,7 @@
 /**
  * @author https://github.com/acvetkov
  * @overview
+ * Teamcity api entry point
  */
 
 import _ from 'lodash';
@@ -13,8 +14,7 @@ export default class TeamcityApi {
      * @param {TeamcityApiOptions} options
      */
     constructor (options = {}) {
-        this.options = _.defaults(options, {
-            host: 'teamcity.domain.com',
+        this.options = _.defaults({}, options, {
             path: '/guestAuth/app/rest/',
             protocol: 'http://'
         });
