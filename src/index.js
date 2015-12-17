@@ -4,7 +4,9 @@
  */
 
 import _ from 'lodash';
+
 import Build from './build/index';
+import Artifact from './artifact/index';
 
 export default class TeamcityApi {
 
@@ -18,6 +20,7 @@ export default class TeamcityApi {
             protocol: 'http://'
         });
         this.build = new Build(this.options);
+        this.artifact = new Artifact(this.options);
     }
 }
 
