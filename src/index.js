@@ -8,7 +8,7 @@ import _ from 'lodash';
 import Build from './build/index';
 import Artifact from './artifact/index';
 
-export default class TeamcityApi {
+export default class TeamcityClient {
 
     /**
      * @param {TeamcityApiOptions} options

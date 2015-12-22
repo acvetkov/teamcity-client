@@ -3,7 +3,7 @@
 ```js
 const teamcity = require('teamcity-client');
 
-const api = new TeamcityApi({
+const api = new TeamcityClient({
     host: 'teamcity.domain.com',
     path: '/guestAuth/app/rest/'
 });
