@@ -1,0 +1,46 @@
+{
+  "name": "teamcity-api",
+  "version": "1.0.0",
+  "description": "Teamcity Api for Node.js",
+  "main": "out/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:acvetkov/teamcity-api.git"
+  },
+  "scripts": {
+    "test": "mocha --recursive --compilers js:babel/register --require ./test/setup.js",
+    "code": "eslint ./src ./test && jscs ./src ./test",
+    "build": "npm run code && npm run test && npm run babel",
+    "babel": "npm run clean && babel ./src --out-dir ./out",
+    "clean": "rm -rf ./out/",
+    "prepublish": "npm run build"
+  },
+  "keywords": [
+    "teamcity",
+    "api",
+    "promise",
+    "node"
+  ],
+  "author": "Aleksey Tsvetkov <aleksey.dmitrich@gmail.com> (https://github.com/acvetkov)",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.0.6",
+    "debug": "^2.2.0",
+    "lodash": "^3.10.1",
+    "q": "^1.4.1",
+    "q-io": "^1.13.1"
+  },
+  "devDependencies": {
+    "babel": "^5.8.34",
+    "chai": "^3.4.1",
+    "chai-as-promised": "^5.1.0",
+    "eslint": "^1.10.1",
+    "eslint-config-airbnb": "^1.0.2",
+    "eslint-plugin-react": "^3.10.0",
+    "jscs": "^2.6.0",
+    "mocha": "^2.3.4",
+    "nock": "^3.3.2",
+    "sinon": "^1.17.2",
+    "webpack": "^1.12.9"
+  }
+}
