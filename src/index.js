@@ -8,7 +8,6 @@ import _ from 'lodash';
 import Build from './build/index';
 import Artifact from './artifact/index';
 
-
 export default class TeamcityClient {
 
     /**
