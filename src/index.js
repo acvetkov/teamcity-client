@@ -8,13 +8,14 @@ import _ from 'lodash';
 import Build from './build/index';
 import Artifact from './artifact/index';
 
+
 export default class TeamcityClient {
 
     /**
      * @param {TeamcityApiOptions} options
      */
     constructor (options) {
-        assertOptions(options);
+        this.assertOptions(options);
         this.options = _.defaults({}, options, {
             path: '/guestAuth/app/rest/',
             protocol: 'http://'
@@ -22,13 +23,13 @@ export default class TeamcityClient {
         this.build = new Build(this.options);
         this.artifact = new Artifact(this.options);
     }
-}
 
-/**
- * @param {TeamcityApiOptions} options
- */
-function assertOptions(options) {
-    if (!options || !_.isString(options.host)) {
-        throw new TypeError('host is not specified');
+    /**
+     * @param {TeamcityApiOptions} options
+     */
+    assertOptions (options) {
+        if (!options || !_.isString(options.host)) {
+            throw new TypeError('host is not specified');
+        }
     }
 }
