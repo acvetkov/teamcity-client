@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/acvetkov/teamcity-client.svg?branch=master)](https://travis-ci.org/acvetkov/teamcity-client)
+
 ## Teamcity Node.js client
 
 ```js
