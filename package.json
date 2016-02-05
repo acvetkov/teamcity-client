@@ -1,6 +1,6 @@
 {
   "name": "teamcity-client",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Teamcity Client for Node.js",
   "main": "out/index.js",
   "repository": {
@@ -13,7 +13,8 @@
     "build": "npm run code && npm run test && npm run babel",
     "babel": "npm run clean && babel ./src --out-dir ./out",
     "clean": "rm -rf ./out/",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "dev": "npm run clean && babel ./src --out-dir ./out --watch"
   },
   "keywords": [
     "teamcity",
