@@ -4,18 +4,15 @@
  * @overview Get build info by criteria
  */
 
-import http from 'q-io/http';
-
 import {buildDetailUrl, buildListUrl} from './url';
-import {toJSON} from '../utils/index';
 
 export default class Build {
 
     /**
-     * @param {TeamcityApiOptions} options
+     * @param {HttpClient} httpClient
      */
-    constructor (options) {
-        this.options = options;
+    constructor (httpClient) {
+        this.httpClient = httpClient;
     }
 
     /**
@@ -24,12 +21,7 @@ export default class Build {
      * @returns {Promise.<Object>|*}
      */
     detail (locator) {
-        return http.read({
-            url: buildDetailUrl(this.options, locator),
-            headers: {
-                Accept: 'application/json'
-            }
-        }).then(toJSON);
+        return this.httpClient.readJSON(buildDetailUrl(locator));
     }
 
     /**
@@ -38,11 +30,6 @@ export default class Build {
      * @returns {Promise.<Object>}
      */
     list (locator) {
-        return http.read({
-            url: buildListUrl(this.options, locator),
-            headers: {
-                Accept: 'application/json'
-            }
-        }).then(toJSON);
+        return this.httpClient.readJSON(buildListUrl(locator));
     }
 }
