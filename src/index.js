@@ -7,6 +7,7 @@ import _ from 'lodash';
 
 import Build from './build/index';
 import Artifact from './artifact/index';
+import Tags from './tags';
 
 export default class TeamcityClient {
 
@@ -21,6 +22,7 @@ export default class TeamcityClient {
         });
         this.build = new Build(this.options);
         this.artifact = new Artifact(this.options);
+        this.tags = new Tags(this.options);
     }
 
     /**

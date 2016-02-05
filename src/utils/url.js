@@ -37,3 +37,12 @@ export function locatorToString(data) {
     });
     return _.compact(options).join();
 }
+
+/**
+ * Get query string
+ * @param {Object} data
+ * @returns {String}
+ */
+export function serializeParams(data) {
+    return _.map(data, (val, key) => `${key}=${val}`).join('&');
+}
