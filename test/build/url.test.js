@@ -4,44 +4,30 @@
 
 import {buildDetailUrl, buildListUrl} from '../../src/build/url';
 
-const options = {
-    protocol: 'http://',
-    host: 'teamcity.net',
-    path: '/guestAuth/app/rest/'
-};
-
 describe('buildDetailUrl', function () {
 
-    it('should return url without locator', function () {
-        assert.equal(buildDetailUrl(options, {}), 'http://teamcity.net/guestAuth/app/rest/builds/');
-        assert.equal(buildDetailUrl(options), 'http://teamcity.net/guestAuth/app/rest/builds/');
+    it('should return apiPath without locator', function () {
+        assert.equal(buildDetailUrl({}), 'builds/');
+        assert.equal(buildDetailUrl(), 'builds/');
     });
 
-    it('should return detail url for build id', function () {
-        assert.equal(buildDetailUrl(options, {id: '1'}), 'http://teamcity.net/guestAuth/app/rest/builds/id:1');
+    it('should return detail apiPath for build id', function () {
+        assert.equal(buildDetailUrl({id: '1'}), 'builds/id:1');
     });
 
-    it('should detail url for build number', function () {
+    it('should detail apiPath for build number', function () {
+        assert.equal(buildDetailUrl({number: '390'}), 'builds/number:390');
+    });
+
+    it('should return detail apiPath with tags', function () {
         assert.equal(
-            buildDetailUrl(options, {number: '390'}),
-            'http://teamcity.net/guestAuth/app/rest/builds/number:390'
+            buildDetailUrl({tags: ['production', 'tested']}), 'builds/tags:(production,tested)'
         );
     });
 
-    it('should return detail url with tags', function () {
-        assert.equal(
-            buildDetailUrl(options, {tags: ['production', 'tested']}),
-            'http://teamcity.net/guestAuth/app/rest/builds/tags:(production,tested)'
-        );
-    });
-
-    it('should return detail url with buildType locator', function () {
-        assert.equal(
-            buildDetailUrl(options, {
-                buildType: {id: 'mega-project'},
-                tags: ['production', 'tested']
-            }),
-            'http://teamcity.net/guestAuth/app/rest/builds/buildType:(id:mega-project),tags:(production,tested)'
+    it('should return detail apiPath with buildType locator', function () {
+        assert.equal(buildDetailUrl({buildType: {id: 'mega-project'}, tags: ['production', 'tested']}),
+            'builds/buildType:(id:mega-project),tags:(production,tested)'
         );
     });
 });
@@ -49,21 +35,17 @@ describe('buildDetailUrl', function () {
 describe('buildListUrl', function () {
 
     it('should return empty locator', function () {
-        assert.equal(buildListUrl(options, {}), 'http://teamcity.net/guestAuth/app/rest/builds/?locator=');
-        assert.equal(buildListUrl(options), 'http://teamcity.net/guestAuth/app/rest/builds/?locator=');
+        assert.equal(buildListUrl({}), 'builds/?locator=');
+        assert.equal(buildListUrl(), 'builds/?locator=');
     });
 
-    it('should return list url for build id', function () {
-        assert.equal(
-            buildListUrl(options, {buildType: {id: 'my-build-id'}}),
-            'http://teamcity.net/guestAuth/app/rest/builds/?locator=buildType:(id:my-build-id)'
-        );
+    it('should return list apiPath for build id', function () {
+        assert.equal(buildListUrl({buildType: {id: 'my-build-id'}}), 'builds/?locator=buildType:(id:my-build-id)');
     });
 
-    it('should return list url for build id with tags', function () {
-        assert.equal(
-            buildListUrl(options, {buildType: {id: 'my-build-id'}, tags: ['production']}),
-            'http://teamcity.net/guestAuth/app/rest/builds/?locator=buildType:(id:my-build-id),tags:(production)'
+    it('should return list apiPath for build id with tags', function () {
+        assert.equal(buildListUrl({buildType: {id: 'my-build-id'}, tags: ['production']}),
+            'builds/?locator=buildType:(id:my-build-id),tags:(production)'
         );
     });
 });
