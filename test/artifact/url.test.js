@@ -4,12 +4,6 @@
 
 import {contentUrl, metaUrl, childrenUrl, archivedUrl} from '../../src/artifact/url';
 
-const options = {
-    protocol: 'http://',
-    host: 'teamcity.net',
-    path: '/guestAuth/app/rest/'
-};
-
 const locator = {
     id: 'project-id'
 };
@@ -17,13 +11,13 @@ const locator = {
 describe('contentUrl', function () {
     it('should return contentUrl with artifact path', function () {
         assert.equal(
-            contentUrl(options, locator, 'package.json'),
-            'http://teamcity.net/guestAuth/app/rest/builds/id:project-id/artifacts/content/package.json'
+            contentUrl(locator, 'package.json'),
+            'builds/id:project-id/artifacts/content/package.json'
         );
 
         assert.equal(
-            contentUrl(options, locator, 'data/a/b/file.jpeg'),
-            'http://teamcity.net/guestAuth/app/rest/builds/id:project-id/artifacts/content/data/a/b/file.jpeg'
+            contentUrl(locator, 'data/a/b/file.jpeg'),
+            'builds/id:project-id/artifacts/content/data/a/b/file.jpeg'
         );
     });
 });
@@ -31,13 +25,13 @@ describe('contentUrl', function () {
 describe('metaUrl', function () {
     it('should return metaUrl with artifact path', function () {
         assert.equal(
-            metaUrl(options, locator, 'package.json'),
-            'http://teamcity.net/guestAuth/app/rest/builds/id:project-id/artifacts/metadata/package.json'
+            metaUrl(locator, 'package.json'),
+            'builds/id:project-id/artifacts/metadata/package.json'
         );
 
         assert.equal(
-            metaUrl(options, locator, 'data/a/b/file.jpeg'),
-            'http://teamcity.net/guestAuth/app/rest/builds/id:project-id/artifacts/metadata/data/a/b/file.jpeg'
+            metaUrl(locator, 'data/a/b/file.jpeg'),
+            'builds/id:project-id/artifacts/metadata/data/a/b/file.jpeg'
         );
     });
 });
@@ -45,13 +39,13 @@ describe('metaUrl', function () {
 describe('childrenUrl', function () {
     it('should return childrenUrl with artifact path', function () {
         assert.equal(
-            childrenUrl(options, locator, 'path'),
-            'http://teamcity.net/guestAuth/app/rest/builds/id:project-id/artifacts/children/path'
+            childrenUrl(locator, 'path'),
+            'builds/id:project-id/artifacts/children/path'
         );
 
         assert.equal(
-            childrenUrl(options, locator, 'data/a/b'),
-            'http://teamcity.net/guestAuth/app/rest/builds/id:project-id/artifacts/children/data/a/b'
+            childrenUrl(locator, 'data/a/b'),
+            'builds/id:project-id/artifacts/children/data/a/b'
         );
     });
 });
@@ -59,14 +53,12 @@ describe('childrenUrl', function () {
 describe('archivedUrl', function () {
     it('should return archivedUrl with artifact path', function () {
         assert.equal(
-            archivedUrl(options, locator, 'path'),
-            'http://teamcity.net/guestAuth/app/rest/builds/id:project-id/artifacts/archived/path'
+            archivedUrl(locator, 'path'),
+            'builds/id:project-id/artifacts/archived/path'
         );
         assert.equal(
-            archivedUrl(options, locator, 'data/a/b', '**/*.js'),
-            // jscs: disable
-            'http://teamcity.net/guestAuth/app/rest/builds/id:project-id/artifacts/archived/data/a/b?locator=pattern:**/*.js'
-            // jscs: enable
+            archivedUrl(locator, 'data/a/b', '**/*.js'),
+            'builds/id:project-id/artifacts/archived/data/a/b?locator=pattern:**/*.js'
         );
     });
 });

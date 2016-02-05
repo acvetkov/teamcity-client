@@ -4,18 +4,15 @@
  * @overview Get artifact data by criteria
  */
 
-import http from 'q-io/http';
-
 import {contentUrl, metaUrl, childrenUrl, archivedUrl} from './url';
-import {toJSON} from '../utils/index';
 
 export default class Artifact {
 
     /**
-     * @param {TeamcityApiOptions} options
+     * @param {HttpClient} httpClient
      */
-    constructor (options) {
-        this.options = options;
+    constructor (httpClient) {
+        this.httpClient = httpClient;
     }
 
     /**
@@ -25,9 +22,7 @@ export default class Artifact {
      * @returns {Promise<Stream>}
      */
     content (locator, path) {
-        return http.read({
-            url: contentUrl(this.options, locator, path)
-        });
+        return this.httpClient.read(contentUrl(locator, path));
     }
 
     /**
@@ -37,12 +32,7 @@ export default class Artifact {
      * @returns {Promise<Object>}
      */
     meta (locator, path) {
-        return http.read({
-            url: metaUrl(this.options, locator, path),
-            headers: {
-                Accept: 'application/json'
-            }
-        }).then(toJSON);
+        return this.httpClient.readJSON(metaUrl(locator, path));
     }
 
     /**
@@ -52,12 +42,7 @@ export default class Artifact {
      * @returns {Promise<Object>}
      */
     children (locator, path) {
-        return http.read({
-            url: childrenUrl(this.options, locator, path),
-            headers: {
-                Accept: 'application/json'
-            }
-        }).then(toJSON);
+        return this.httpClient.readJSON(childrenUrl(locator, path));
     }
 
     /**
@@ -68,8 +53,6 @@ export default class Artifact {
      * @returns {Promise<Stream>}
      */
     archived (locator, path, wildcard) {
-        return http.read({
-            url: archivedUrl(this.options, locator, path, wildcard)
-        });
+        return this.httpClient.read(archivedUrl(locator, path, wildcard));
     }
 }
