@@ -115,3 +115,32 @@ Download zip with all js-files in directory `relative/path`
 api.artifact.archived(options, 'relative/path', '**/*.js')
    .then(blob => fs.write('data.zip', blob))
 ```
+
+### tags
+
+**Get tags**
+
+```js
+api.tags.get(locator)
+   .then(data => console.log(data))
+```
+
+**Add tags**
+
+```js
+api.tags.add(locator, ['tag1', 'tag2'])
+   .then(data => console.log(data))
+   
+api.tags.add(locator, 'new_tag')
+   .then(data => console.log(data))   
+```
+
+**Replace tags**
+
+```js
+api.tags.replace(locator, ['tag1', 'tag2'])
+   .then(data => console.log(data))
+   
+api.tags.add(locator, 'new_tag')
+   .then(data => console.log(data))   
+```
