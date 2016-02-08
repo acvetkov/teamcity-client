@@ -5,6 +5,7 @@
 
 import _ from 'lodash';
 
+import HttpClient from './utils/http-client';
 import Build from './build/index';
 import Artifact from './artifact/index';
 
@@ -16,11 +17,12 @@ export default class TeamcityClient {
     constructor (options) {
         this.assertOptions(options);
         this.options = _.defaults({}, options, {
-            path: '/guestAuth/app/rest/',
             protocol: 'http://'
         });
-        this.build = new Build(this.options);
-        this.artifact = new Artifact(this.options);
+
+        this.httpClient = new HttpClient(this.options);
+        this.build = new Build(this.httpClient);
+        this.artifact = new Artifact(this.httpClient);
     }
 
     /**

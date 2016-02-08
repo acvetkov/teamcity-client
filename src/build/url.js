@@ -3,31 +3,26 @@
  * @overview build urls helper
  */
 
-import {apiUrl} from '../utils/url';
 import {locatorToString} from '../utils/url';
 
 /**
  * Get detail build url
  * @see https://confluence.jetbrains.com/display/TCD9/REST+API#RESTAPI-BuildLocator
- * @param {TeamcityApiOptions} options
  * @param {Object|String|Number} locatorObject
  * @returns {String}
  */
-export function buildDetailUrl(options, locatorObject = {}) {
-    const baseUrl = apiUrl(options);
+export function buildDetailUrl(locatorObject = {}) {
     const locator = locatorToString(locatorObject);
-    return `${baseUrl}builds/${locator}`;
+    return `builds/${locator}`;
 }
 
 /**
  * Get list build url
  * @see https://confluence.jetbrains.com/display/TCD9/REST+API#RESTAPI-BuildLocator
- * @param {TeamcityApiOptions} options
  * @param {Object|String|Number} locatorObject
  * @returns {String}
  */
-export function buildListUrl(options, locatorObject = {}) {
-    const baseUrl = apiUrl(options);
+export function buildListUrl(locatorObject = {}) {
     const locator = locatorToString(locatorObject);
-    return `${baseUrl}builds/?locator=${locator}`;
+    return `builds/?locator=${locator}`;
 }

@@ -6,15 +6,6 @@
 import _ from 'lodash';
 
 /**
- * Api url
- * @param {TeamcityApiOptions} options
- * @returns {*}
- */
-export function apiUrl(options) {
-    return `${options.protocol}${options.host}${options.path}`;
-}
-
-/**
  * Convert object to String
  * object {a: 'b', c: 'd'} => (a:b,c:d)
  * array [1, 2, 3] => (1,2,3)
