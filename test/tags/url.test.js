@@ -4,21 +4,15 @@
 
 import {tagsUrl, tagsToObject} from '../../src/tags/url';
 
-const options = {
-    protocol: 'http://',
-    host: 'teamcity.net',
-    path: '/guestAuth/app/rest/'
-};
-
 const locator = {
     id: 'project-id'
 };
 
 describe('tagsUrl', function () {
-    it('should return correct url', function () {
+    it('should return correct api path', function () {
         assert.equal(
-            tagsUrl(options, locator),
-            'http://teamcity.net/guestAuth/app/rest/builds/id:project-id/tags/'
+            tagsUrl(locator),
+            'builds/id:project-id/tags/'
         );
     });
 });
