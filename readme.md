@@ -7,7 +7,8 @@ const teamcity = require('teamcity-client');
 
 const api = new TeamcityClient({
     host: 'teamcity.domain.com',
-    path: '/guestAuth/app/rest/'
+    user: 'username', // optional
+    password: 'pwd' // optional
 });
 ```
 
