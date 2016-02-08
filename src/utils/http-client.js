@@ -1,6 +1,8 @@
 /**
- * @author acvetkov@yandex-team.ru
- * @overview api request helper
+ * @author https://github.com/acvetkov
+ * @overview Api request helper.
+ * Proxy http requests, call api methods as guest user if auth info is not passed,
+ * call api methods with basic authentication, if auth data passed
  */
 
 import _ from 'lodash';
