@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/acvetkov/teamcity-client.svg?branch=master)](https://travis-ci.org/acvetkov/teamcity-client)
+
 ## Teamcity Node.js client
 
 ```js
@@ -5,7 +7,8 @@ const teamcity = require('teamcity-client');
 
 const api = new TeamcityClient({
     host: 'teamcity.domain.com',
-    path: '/guestAuth/app/rest/'
+    user: 'username', // optional
+    password: 'pwd' // optional
 });
 ```
 
