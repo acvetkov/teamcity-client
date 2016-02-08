@@ -20,7 +20,7 @@ export default class TeamcityClient {
         this.options = _.defaults({}, options, {
             protocol: 'http://'
         });
-
+        this.httpClient = new HttpClient(this.options);
         this.build = new Build(this.httpClient);
         this.artifact = new Artifact(this.httpClient);
         this.tags = new Tags(this.httpClient);

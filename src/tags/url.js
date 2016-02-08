@@ -4,18 +4,15 @@
  */
 
 import _ from 'lodash';
-import {apiUrl} from '../utils/url';
 import {locatorToString} from '../utils/url';
 
 /**
- * @param {TeamcityApiOptions} options
  * @param {Object} locatorObject
  * @returns {String}
  */
-export function tagsUrl(options, locatorObject) {
-    const baseUrl = apiUrl(options);
+export function tagsUrl(locatorObject) {
     const locator = locatorToString(locatorObject);
-    return `${baseUrl}builds/${locator}/tags/`;
+    return `builds/${locator}/tags/`;
 }
 
 /**

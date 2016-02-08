@@ -3,18 +3,15 @@
  * @overview Work with build tags
  */
 
-import http from 'q-io/http';
-
 import {tagsUrl, serializeTags} from './url';
-import {toJSON} from '../utils/index';
 
 export default class BuildTags {
 
     /**
-     * @param {TeamcityApiOptions} options
+     * @param {HttpClient} httpClient
      */
-    constructor (options) {
-        this.options = options;
+    constructor (httpClient) {
+        this.httpClient = httpClient;
     }
 
     /**
@@ -23,12 +20,7 @@ export default class BuildTags {
      * @returns {Promise.<Object>}
      */
     get (locator) {
-        return http.read({
-            url: tagsUrl(this.options, locator),
-            headers: {
-                Accept: 'application/json'
-            }
-        }).then(toJSON);
+        return this.httpClient.readJSON(tagsUrl(locator));
     }
 
     /**
@@ -38,15 +30,7 @@ export default class BuildTags {
      * @returns {Promise.<Object>}
      */
     add (locator, tags) {
-        return http.read({
-            url: tagsUrl(this.options, locator),
-            method: 'POST',
-            body: [serializeTags(tags)],
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            }
-        }).then(toJSON);
+        return this.httpClient.sendJSON(tagsUrl(locator), [serializeTags(tags)]);
     }
 
     /**
@@ -56,14 +40,6 @@ export default class BuildTags {
      * @returns {Promise.<Object>}
      */
     replace (locator, tags) {
-        return http.read({
-            url: tagsUrl(this.options, locator),
-            method: 'PUT',
-            body: [serializeTags(tags)],
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            }
-        }).then(toJSON);
+        return this.httpClient.sendJSON(tagsUrl(locator), [serializeTags(tags)], 'PUT');
     }
 }
