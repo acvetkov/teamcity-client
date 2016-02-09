@@ -50,6 +50,22 @@ export default class HttpClient {
     }
 
     /**
+     * Send json-data
+     * @param {String} apiPath
+     * @param {*} body
+     * @param {String} method
+     * @param {Object} [headers]
+     */
+    sendJSON (apiPath, body, method = 'POST', headers = {}) {
+        return http.read({
+            url: `${this.apiUrl}${apiPath}`,
+            method: method,
+            body: body,
+            headers: _.merge({'Content-Type': 'application/json'}, headers, this.authHeader, this.jsonHeader)
+        }).then(toJSON);
+    }
+
+    /**
      * Get common headers for all api calls
      * @returns {*}
      */

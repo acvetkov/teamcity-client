@@ -8,6 +8,7 @@ import _ from 'lodash';
 import HttpClient from './utils/http-client';
 import Build from './build/index';
 import Artifact from './artifact/index';
+import Tags from './tags';
 
 export default class TeamcityClient {
 
@@ -19,10 +20,10 @@ export default class TeamcityClient {
         this.options = _.defaults({}, options, {
             protocol: 'http://'
         });
-
         this.httpClient = new HttpClient(this.options);
         this.build = new Build(this.httpClient);
         this.artifact = new Artifact(this.httpClient);
+        this.tags = new Tags(this.httpClient);
     }
 
     /**
