@@ -1,6 +1,6 @@
 {
   "name": "teamcity-client",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Teamcity Client for Node.js",
   "main": "out/index.js",
   "repository": {
