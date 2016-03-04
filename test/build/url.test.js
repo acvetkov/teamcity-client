@@ -30,6 +30,24 @@ describe('buildDetailUrl', function () {
             'builds/buildType:(id:mega-project),tags:(production,tested)'
         );
     });
+
+    it('should encode locator params', function () {
+        assert.equal(buildDetailUrl({buildType: {id: 'mega-project'}, branch: 'my/mega/branch'}),
+            'builds/buildType:(id:mega-project),branch:my%2Fmega%2Fbranch'
+        );
+    });
+
+    it('should encode locator for nested params', function () {
+        assert.equal(buildDetailUrl({buildType: {id: 'mega/project'}, branch: 'my/mega/branch'}),
+            'builds/buildType:(id:mega%2Fproject),branch:my%2Fmega%2Fbranch'
+        );
+    });
+
+    it('should encode locator for nested params', function () {
+        assert.equal(buildDetailUrl({buildType: {id: 'mega/project'}, tags: ['tag/1', 'tag/2']}),
+            'builds/buildType:(id:mega%2Fproject),tags:(tag%2F1,tag%2F2)'
+        );
+    });
 });
 
 describe('buildListUrl', function () {
