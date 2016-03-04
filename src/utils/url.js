@@ -15,16 +15,16 @@ import _ from 'lodash';
  */
 export function locatorToString(data) {
     if (!_.isPlainObject(data)) {
-        return data;
+        return encodeURIComponent(data);
     }
     const options = _.map(data, (value, key) => {
         if (_.isArray(value)) {
-            return `${key}:(${value.join()})`;
+            return `${key}:(${value.map(encodeURIComponent).join()})`;
         }
         if (_.isPlainObject(value)) {
             return `${key}:(${locatorToString(value)})`;
         }
-        return `${key}:${value}`;
+        return `${key}:${encodeURIComponent(value)}`;
     });
     return _.compact(options).join();
 }
