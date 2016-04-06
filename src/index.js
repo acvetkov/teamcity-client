@@ -9,6 +9,7 @@ import HttpClient from './utils/http-client';
 import Build from './build/index';
 import Artifact from './artifact/index';
 import Tags from './tags';
+import Changes from './changes';
 
 export default class TeamcityClient {
 
@@ -24,6 +25,7 @@ export default class TeamcityClient {
         this.build = new Build(this.httpClient);
         this.artifact = new Artifact(this.httpClient);
         this.tags = new Tags(this.httpClient);
+        this.changes = new Changes(this.httpClient);
     }
 
     /**
