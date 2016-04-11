@@ -29,7 +29,7 @@ export default class Changes {
      * @param {Boolean} [options.withDetails]
      * @returns {Promise.<Object>}
      */
-    list (buildId, options) {
+    list (buildId, options = {}) {
         let result = this.httpClient.readJSON(changesListUrl(buildId));
         if (options.withDetails) {
             result = result.then(changes => {
