@@ -25,7 +25,7 @@ describe('changes/index', function () {
             .get('/guestAuth/app/rest/changes/id:1')
             .reply(200, {id: 1, comment: 'abc'})
             .get('/guestAuth/app/rest/changes/id:2')
-            .reply(200, {id: 2, comment: 'def'})
+            .reply(200, {id: 2, comment: 'def'});
     });
 
     it('should load list without details', function () {
