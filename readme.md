@@ -144,3 +144,26 @@ api.tags.replace(locator, ['tag1', 'tag2'])
 api.tags.add(locator, 'new_tag')
    .then(data => console.log(data))   
 ```
+
+### changes
+
+**Get changes list**
+
+```js
+api.changes.list(buildId)
+   .then(data => console.log(data))
+```
+
+**Get changes list with details**
+
+```js
+api.changes.list(buildId, {withDetails: true})
+   .then(data => console.log(data))
+```
+
+**Get particular change details**
+
+```js
+api.changes.detail(changeId)
+   .then(data => console.log(data))
+```

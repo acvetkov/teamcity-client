@@ -133,6 +133,9 @@ function assertOptions(options) {
     if (!_.isString(options.user) && _.isString(options.password)) {
         throw new Error('Incorrect user type');
     }
+    if (!options.protocol) {
+        options.protocol = 'http://';
+    }
 }
 
 /**
