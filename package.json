@@ -37,6 +37,7 @@
     "chai": "^3.4.1",
     "chai-as-promised": "^5.1.0",
     "eslint": "^2.7.0",
+    "eslint-plugin-babel": "^3.2.0",
     "jscs": "^2.6.0",
     "mocha": "^2.3.4",
     "nock": "^8.0.0",
