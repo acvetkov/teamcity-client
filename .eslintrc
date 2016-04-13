@@ -1,29 +1,22 @@
 {
+  "extends": "eslint:recommended",
   "parser": "babel-eslint",
-  "extends": "airbnb",
-  "rules": {
-    "indent": [2, 4],
-    "valid-jsdoc": 0,
-    "func-names": 0,
-    "space-before-function-paren": 0,
-    "padded-blocks": 0,
-    "no-var": 0,
-    "comma-dangle": 0,
-    "strict": 0,
-    "vars-on-top": 0,
-    "no-use-before-define": 0,
-    "id-length": 0,
-    "no-param-reassign": 0
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "plugins": ["babel"],
+  "env": {
+    "node": true,
+    "es6": true
   },
   "globals": {
-    "it": false,
-    "before": false,
-    "after": false,
-    "beforeEach": false,
-    "afterEach": false,
     "describe": false,
-    "chrome": false,
+    "it": false,
     "assert": false,
-    "sinon": false
+    "before": false,
+    "beforeEach": false,
+    "after": false,
+    "afterEach": false
   }
 }
