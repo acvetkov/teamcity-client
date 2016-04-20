@@ -50,6 +50,18 @@ describe('changes/index', function () {
         });
     });
 
+    it('should load list with details in case of no changes', function () {
+        nock.cleanAll();
+        nock(`http://${tcHost}`)
+            .get('/guestAuth/app/rest/changes/')
+            .query({build: 'id:123'})
+            .reply(200, {id: 123});
+
+        return this.changes.list(123, {withDetails: true}).then(changes => {
+            assert.deepEqual(changes, {id: 123});
+        });
+    });
+
     it('should load details', function () {
         return this.changes.detail(1).then(change => {
             assert.deepEqual(change, {id: 1, comment: 'abc'});

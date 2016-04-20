@@ -33,6 +33,9 @@ export default class Changes {
         let result = this.httpClient.readJSON(changesListUrl(buildId));
         if (options.withDetails) {
             result = result.then(changes => {
+                if (!Array.isArray(changes.change)) {
+                    return changes;
+                }
                 const tasks = changes.change.map(change => {
                     return this.detail(change.id).catch(() => change);
                 });
