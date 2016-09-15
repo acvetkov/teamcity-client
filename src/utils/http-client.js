@@ -72,7 +72,7 @@ export default class HttpClient {
     get authHeader () {
         if (this.httpAccess) {
             return {
-                Authorization: this.auth
+                Authorization: `Basic ${this.auth}`
             };
         }
         return {};
