@@ -6,11 +6,13 @@
  */
 
 import _ from 'lodash';
+import createDebug from 'debug';
 import http from 'q-io/http';
 import {toJSON} from './index';
 
 const GUEST_USER = 'guestAuth';
 const HTTP_USER = 'httpAuth';
+const debug = createDebug('teamcity-client');
 
 export default class HttpClient {
 
@@ -26,14 +28,18 @@ export default class HttpClient {
      * Http request
      * @param {String} apiPath
      * @param {String} method
-     * @param {Object} headers
+     * @param {Object} addHeaders
      * @returns {Promise<Buffer>}
      */
-    read (apiPath, method = 'GET', headers = {}) {
+    read (apiPath, method = 'GET', addHeaders = {}) {
+        const url = `${this.apiUrl}${apiPath}`;
+        const headers = _.assign({}, addHeaders, this.authHeader);
+        debug(`${method} ${url}`);
+        debug(`headers: ${JSON.stringify(headers)}`);
         return http.read({
-            url: `${this.apiUrl}${apiPath}`,
-            method: method,
-            headers: _.merge({}, headers, this.authHeader)
+            url,
+            method,
+            headers
         });
     }
 
@@ -45,7 +51,7 @@ export default class HttpClient {
      * @returns {Promise<Object>}
      */
     readJSON (apiPath, method, headers) {
-        return this.read(apiPath, method, _.merge(this.jsonHeader, headers || {}))
+        return this.read(apiPath, method, _.assign(this.jsonHeader, headers || {}))
             .then(toJSON);
     }
 
@@ -54,14 +60,16 @@ export default class HttpClient {
      * @param {String} apiPath
      * @param {*} body
      * @param {String} method
-     * @param {Object} [headers]
+     * @param {Object} [addHeaders]
      */
-    sendJSON (apiPath, body, method = 'POST', headers = {}) {
+    sendJSON (apiPath, body, method = 'POST', addHeaders = {}) {
+        const url = `${this.apiUrl}${apiPath}`;
+        const headers = _.assign({'Content-Type': 'application/json'}, addHeaders, this.authHeader, this.jsonHeader);
         return http.read({
-            url: `${this.apiUrl}${apiPath}`,
-            method: method,
-            body: body,
-            headers: _.merge({'Content-Type': 'application/json'}, headers, this.authHeader, this.jsonHeader)
+            url,
+            method,
+            body,
+            headers
         }).then(toJSON);
     }
 
