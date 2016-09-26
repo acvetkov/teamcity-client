@@ -24,7 +24,7 @@ export default class TeamcityClient {
         });
         this.httpClient = new HttpClient(this.options);
         this.build = new Build(this.httpClient);
-		this.buildType = new BuildType(this.httpClient);
+        this.buildType = new BuildType(this.httpClient);
         this.artifact = new Artifact(this.httpClient);
         this.tags = new Tags(this.httpClient);
         this.changes = new Changes(this.httpClient);
