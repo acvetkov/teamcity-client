@@ -3,7 +3,7 @@
 ## Teamcity Node.js client
 
 ```js
-const teamcity = require('teamcity-client');
+const api = require('teamcity-client');
 
 const api = new TeamcityClient({
     host: 'teamcity.domain.com',
@@ -23,32 +23,32 @@ const options = {
 };
 
 // get last build by criteria
-teamcity.build.detail(options)
+api.build.detail(options)
    .then(buildInfo => console.log(buildInfo))
    .catch(err => console.error(err));
 
 // get build by id
-teamcity.build.detail({id: 'my-build-id'})
+api.build.detail({id: 'my-build-id'})
    .then(buildInfo => console.log(buildInfo))
    .catch(err => console.error(err));
-   
+
 // get build by number
-teamcity.build.detail({number: '537'})
+api.build.detail({number: '537'})
    .then(buildInfo => console.log(buildInfo))
-   .catch(err => console.error(err));   
+   .catch(err => console.error(err));
 ```
 
 Get list of builds by criteria
 
 ```js
-teamcity.build.list({buildType: {id: 'project-id'}})
+api.build.list({buildType: {id: 'project-id'}})
    .then(buildList => console.log(buildList))
-   
-teamcity.build.list({buildType: {id: 'project-id'}, tags: ['production']})
-   .then(buildList => console.log(buildList))   
+
+api.build.list({buildType: {id: 'project-id'}, tags: ['production']})
+   .then(buildList => console.log(buildList))
 ```
 
-You can use all [build locator](https://confluence.jetbrains.com/display/TCD9/REST+API#RESTAPI-BuildLocator) params to get build 
+You can use all [build locator](https://confluence.jetbrains.com/display/TCD9/REST+API#RESTAPI-BuildLocator) params to get build
 
 ### artifacts
 
@@ -130,9 +130,9 @@ api.tags.get(locator)
 ```js
 api.tags.add(locator, ['tag1', 'tag2'])
    .then(data => console.log(data))
-   
+
 api.tags.add(locator, 'new_tag')
-   .then(data => console.log(data))   
+   .then(data => console.log(data))
 ```
 
 **Replace tags**
@@ -140,9 +140,9 @@ api.tags.add(locator, 'new_tag')
 ```js
 api.tags.replace(locator, ['tag1', 'tag2'])
    .then(data => console.log(data))
-   
+
 api.tags.add(locator, 'new_tag')
-   .then(data => console.log(data))   
+   .then(data => console.log(data))
 ```
 
 ### changes
