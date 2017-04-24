@@ -8,6 +8,7 @@ import _ from 'lodash';
 import HttpClient from './utils/http-client';
 import Build from './build/index';
 import BuildType from './buildType/index';
+import Project from './project';
 import Artifact from './artifact/index';
 import Tags from './tags';
 import Changes from './changes';
@@ -25,6 +26,7 @@ export default class TeamcityClient {
         this.httpClient = new HttpClient(this.options);
         this.build = new Build(this.httpClient);
         this.buildType = new BuildType(this.httpClient);
+        this.project = new Project(this.httpClient);
         this.artifact = new Artifact(this.httpClient);
         this.tags = new Tags(this.httpClient);
         this.changes = new Changes(this.httpClient);
