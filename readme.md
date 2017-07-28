@@ -3,7 +3,7 @@
 ## Teamcity Node.js client
 
 ```js
-const api = require('teamcity-client');
+const TeamcityClient = require('teamcity-client');
 
 const api = new TeamcityClient({
     host: 'teamcity.domain.com',
