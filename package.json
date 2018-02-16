@@ -25,6 +25,7 @@
   "author": "Aleksey Tsvetkov <aleksey.dmitrich@gmail.com> (https://github.com/acvetkov)",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.17.1",
     "debug": "^2.2.0",
     "lodash": "^3.10.1",
     "q": "^1.4.1",
