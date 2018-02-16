@@ -7,7 +7,7 @@
 
 import _ from 'lodash';
 import createDebug from 'debug';
-import http from 'q-io/http';
+import axios from 'axios';
 import {toJSON} from './index';
 
 const GUEST_USER = 'guestAuth';
@@ -33,14 +33,15 @@ export default class HttpClient {
      */
     read (apiPath, method = 'GET', addHeaders = {}) {
         const url = `${this.apiUrl}${apiPath}`;
-        const headers = _.assign({}, addHeaders, this.authHeader);
+        const headers = _.assign({}, addHeaders);
         debug(`${method} ${url}`);
         debug(`headers: ${JSON.stringify(headers)}`);
-        return http.read({
+        return axios({
             url,
             method,
-            headers
-        });
+            headers,
+            responseType: 'arraybuffer'
+        }).then(resp => resp.data);
     }
 
     /**
@@ -64,26 +65,21 @@ export default class HttpClient {
      */
     sendJSON (apiPath, body, method = 'POST', addHeaders = {}) {
         const url = `${this.apiUrl}${apiPath}`;
-        const headers = _.assign({'Content-Type': 'application/json'}, addHeaders, this.authHeader, this.jsonHeader);
-        return http.read({
+        const headers = _.assign({'Content-Type': 'application/json'}, addHeaders, this.jsonHeader);
+        return axios({
             url,
             method,
             body,
             headers
-        }).then(toJSON);
+        }).then(resp => toJSON(resp.data));
     }
 
     /**
-     * Get common headers for all api calls
+     * Get auth url part
      * @returns {*}
      */
-    get authHeader () {
-        if (this.httpAccess) {
-            return {
-                Authorization: `Basic ${this.auth}`
-            };
-        }
-        return {};
+    get authUrlPart () {
+        return this.httpAccess ? `${this.options.user}:${this.options.password}@` : '';
     }
 
     /**
@@ -100,7 +96,7 @@ export default class HttpClient {
      * @returns {String}
      */
     get apiUrl () {
-        return `${this.options.protocol}${this.options.host}/${this.accessType}/app/rest/`;
+        return `${this.options.protocol}${this.authUrlPart}${this.options.host}/${this.accessType}/app/rest/`;
     }
 
     /**
