@@ -6,9 +6,10 @@ import {buildDetailUrl, buildListUrl} from '../../src/build/url';
 
 describe('buildDetailUrl', function () {
 
-    it('should return apiPath without locator', function () {
-        assert.equal(buildDetailUrl({}), 'builds/');
-        assert.equal(buildDetailUrl(), 'builds/');
+    it('should throw Error when locator is empty', function () {
+        //NOTE: this because 'builds/' API return list, not details
+        assert.throws(() => buildDetailUrl({}), Error);
+        assert.throws(() => buildDetailUrl(), Error);
     });
 
     it('should return detail apiPath for build id', function () {
@@ -52,9 +53,9 @@ describe('buildDetailUrl', function () {
 
 describe('buildListUrl', function () {
 
-    it('should return empty locator', function () {
-        assert.equal(buildListUrl({}), 'builds/?locator=');
-        assert.equal(buildListUrl(), 'builds/?locator=');
+    it('shouldnt return empty locator', function () {
+        assert.equal(buildListUrl({}), 'builds/');
+        assert.equal(buildListUrl(), 'builds/');
     });
 
     it('should return list apiPath for build id', function () {
