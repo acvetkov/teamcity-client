@@ -18,18 +18,20 @@ export default class Build {
     /**
      * Get last build by query
      * @param {Object|String|Number} locator
+     * @param {Object} args API http query arguments
      * @returns {Promise.<Object>|*}
      */
-    detail (locator) {
-        return this.httpClient.readJSON(buildDetailUrl(locator));
+    detail (locator, args) {
+        return this.httpClient.readJSON(buildDetailUrl(locator, args));
     }
 
     /**
      * Get build list by query
      * @param {Object|String|Number} locator
+     * @param {Object} args API http query arguments
      * @returns {Promise.<Object>}
      */
-    list (locator) {
-        return this.httpClient.readJSON(buildListUrl(locator));
+    list (locator, args) {
+        return this.httpClient.readJSON(buildListUrl(locator, args));
     }
 }

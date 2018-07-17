@@ -49,6 +49,10 @@ describe('buildDetailUrl', function () {
             'builds/buildType:(id:mega%2Fproject),tags:(tag%2F1,tag%2F2)'
         );
     });
+
+    it('should return detail apiPath for build id with custom query arg', function () {
+        assert.equal(buildDetailUrl({id: '1'}, {someQueryArg: 42}), 'builds/id:1?someQueryArg=42');
+    });
 });
 
 describe('buildListUrl', function () {
@@ -66,5 +70,13 @@ describe('buildListUrl', function () {
         assert.equal(buildListUrl({buildType: {id: 'my-build-id'}, tags: ['production']}),
             'builds/?locator=buildType:(id:my-build-id),tags:(production)'
         );
+    });
+
+    it('should return list apiPath for build id limited by count in query args', function () {
+        assert.equal(buildListUrl({buildType: {id: 'my-build-id'}}, {count: 42}), 'builds/?locator=buildType:(id:my-build-id)&count=42');
+    });
+
+    it('should return list apiPath limited by count in query args', function () {
+        assert.equal(buildListUrl(undefined, {count: 42}), 'builds/?count=42');
     });
 });
