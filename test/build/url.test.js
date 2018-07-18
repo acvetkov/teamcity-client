@@ -7,7 +7,7 @@ import {buildDetailUrl, buildListUrl} from '../../src/build/url';
 describe('buildDetailUrl', function () {
 
     it('should throw Error when locator is empty', function () {
-        //NOTE: this because 'builds/' API return list, not details
+        // NOTE: this because 'builds/' API return list, not details
         assert.throws(() => buildDetailUrl({}), Error);
         assert.throws(() => buildDetailUrl(), Error);
     });
@@ -73,7 +73,9 @@ describe('buildListUrl', function () {
     });
 
     it('should return list apiPath for build id limited by count in query args', function () {
-        assert.equal(buildListUrl({buildType: {id: 'my-build-id'}}, {count: 42}), 'builds/?locator=buildType:(id:my-build-id)&count=42');
+        assert.equal(buildListUrl({buildType: {id: 'my-build-id'}},
+                                  {count: 42}),
+                                  'builds/?locator=buildType:(id:my-build-id)&count=42');
     });
 
     it('should return list apiPath limited by count in query args', function () {
