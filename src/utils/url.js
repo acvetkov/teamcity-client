@@ -35,5 +35,5 @@ export function locatorToString(data) {
  * @returns {String}
  */
 export function serializeParams(data) {
-    return _.map(data, (val, key) => `${key}=${val}`).join('&');
+    return _.map(data, (val, key) => `${encodeURIComponent(key)}=${encodeURIComponent(val)}`).join('&');
 }

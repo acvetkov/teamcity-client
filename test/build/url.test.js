@@ -6,9 +6,10 @@ import {buildDetailUrl, buildListUrl} from '../../src/build/url';
 
 describe('buildDetailUrl', function () {
 
-    it('should return apiPath without locator', function () {
-        assert.equal(buildDetailUrl({}), 'builds/');
-        assert.equal(buildDetailUrl(), 'builds/');
+    it('should throw Error when locator is empty', function () {
+        // NOTE: this because 'builds/' API return list, not details
+        assert.throws(() => buildDetailUrl({}), Error);
+        assert.throws(() => buildDetailUrl(), Error);
     });
 
     it('should return detail apiPath for build id', function () {
@@ -48,13 +49,17 @@ describe('buildDetailUrl', function () {
             'builds/buildType:(id:mega%2Fproject),tags:(tag%2F1,tag%2F2)'
         );
     });
+
+    it('should return detail apiPath for build id with custom query arg', function () {
+        assert.equal(buildDetailUrl({id: '1'}, {someQueryArg: 42}), 'builds/id:1?someQueryArg=42');
+    });
 });
 
 describe('buildListUrl', function () {
 
-    it('should return empty locator', function () {
-        assert.equal(buildListUrl({}), 'builds/?locator=');
-        assert.equal(buildListUrl(), 'builds/?locator=');
+    it('shouldnt return empty locator', function () {
+        assert.equal(buildListUrl({}), 'builds/');
+        assert.equal(buildListUrl(), 'builds/');
     });
 
     it('should return list apiPath for build id', function () {
@@ -65,5 +70,15 @@ describe('buildListUrl', function () {
         assert.equal(buildListUrl({buildType: {id: 'my-build-id'}, tags: ['production']}),
             'builds/?locator=buildType:(id:my-build-id),tags:(production)'
         );
+    });
+
+    it('should return list apiPath for build id limited by count in query args', function () {
+        assert.equal(buildListUrl({buildType: {id: 'my-build-id'}},
+                                  {count: 42}),
+                                  'builds/?locator=buildType:(id:my-build-id)&count=42');
+    });
+
+    it('should return list apiPath limited by count in query args', function () {
+        assert.equal(buildListUrl(undefined, {count: 42}), 'builds/?count=42');
     });
 });
