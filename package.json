@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "mocha --recursive --compilers js:babel/register --require ./test/setup.js",
-    "code": "eslint ./src ./test && jscs ./src ./test --verbose",
+    "code": "eslint ./src ./test",
     "build": "npm run code && npm run test && npm run babel",
     "babel": "npm run clean && babel ./src --out-dir ./out",
     "clean": "rm -rf ./out/",
@@ -38,7 +38,6 @@
     "chai-as-promised": "^5.1.0",
     "eslint": "^2.7.0",
     "eslint-plugin-babel": "^3.2.0",
-    "jscs": "^2.6.0",
     "mocha": "^2.3.4",
     "nock": "^8.0.0",
     "sinon": "^1.17.2"
