@@ -8,7 +8,7 @@
     "url": "git@github.com:acvetkov/teamcity-client.git"
   },
   "scripts": {
-    "test": "mocha --recursive --compilers js:babel/register --require ./test/setup.js",
+    "test": "mocha --recursive --require babel-core/register --require ./test/setup.js",
     "code": "eslint ./src ./test",
     "build": "npm run code && npm run test && npm run babel",
     "babel": "npm run clean && babel ./src --out-dir ./out",
@@ -31,8 +31,11 @@
     "q": "^1.5.1"
   },
   "devDependencies": {
-    "babel": "^5.8.34",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "eslint": "^5.9.0",
