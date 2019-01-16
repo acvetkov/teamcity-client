@@ -3,26 +3,47 @@
  * @overview build urls helper
  */
 
-import {locatorToString} from '../utils/url';
+import {locatorToString, serializeParams} from '../utils/url';
 
 /**
  * Get detail build url
  * @see https://confluence.jetbrains.com/display/TCD9/REST+API#RESTAPI-BuildLocator
  * @param {Object|String|Number} locatorObject
+ * @param {Object} args API http query arguments
  * @returns {String}
+ * @throws {Error} Argument locatorObject must not be empty
  */
-export function buildDetailUrl(locatorObject = {}) {
+export function buildDetailUrl(locatorObject = {}, args = undefined) {
     const locator = locatorToString(locatorObject);
-    return `builds/${locator}`;
+    if (!locator) {
+        throw new Error('Please fill locatorObject');
+    }
+
+    let rv = `builds/${locator}`;
+    if (args) {
+        const args_s = serializeParams(args);
+        rv += `?${args_s}`;
+    }
+    return rv;
 }
 
 /**
  * Get list build url
  * @see https://confluence.jetbrains.com/display/TCD9/REST+API#RESTAPI-BuildLocator
- * @param {Object|String|Number} locatorObject
+ * @param {Object|String|Number|undefined} locatorObject
+ * @param {Object} args API http query arguments
  * @returns {String}
  */
-export function buildListUrl(locatorObject = {}) {
+export function buildListUrl(locatorObject = {}, args = undefined) {
+    let rv = 'builds/' ;
     const locator = locatorToString(locatorObject);
-    return `builds/?locator=${locator}`;
+    if (locator) {
+        rv += `?locator=${locator}`;
+    }
+    if (args) {
+        const args_s = serializeParams(args);
+        rv += locator ? '&' : '?';
+        rv += args_s;
+    }
+    return rv;
 }
